@@ -213,3 +213,125 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
+Question 2
+
+
+"""
+=====================================================
+   MATHEMATICAL CALCULATOR (MC)
+   A Simple Interactive Console Calculator in Python
+=====================================================
+Operations supported:
+    +   Addition
+    -   Subtraction
+    *   Multiplication
+    /   Division
+    \\   Integer (Floor) Division
+    ^   Exponentiation (Power)
+    %   Modulus (Remainder)
+    C   Clear Screen
+    OFF Exit the Program
+=====================================================
+"""
+
+import os
+
+
+def clear_screen():
+    """Clears the console screen (works on Windows and Unix-based systems)."""
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def display_menu():
+    """Displays the calculator's main menu."""
+    print("=" * 45)
+    print("        MATHEMATICAL CALCULATOR (MC)")
+    print("=" * 45)
+    print(" +   : Addition")
+    print(" -   : Subtraction")
+    print(" *   : Multiplication")
+    print(" /   : Division")
+    print(" \\   : Integer (Floor) Division")
+    print(" ^   : Exponentiation (Power)")
+    print(" %   : Modulus (Remainder)")
+    print(" C   : Clear Screen")
+    print(" OFF : Exit Program")
+    print("=" * 45)
+
+
+def get_numbers():
+    """Prompts the user for two numeric values, with basic input validation."""
+    while True:
+        try:
+            num1 = float(input("Enter first number  : "))
+            num2 = float(input("Enter second number : "))
+            return num1, num2
+        except ValueError:
+            print(">> Invalid input. Please enter numeric values only.\n")
+
+
+def calculate(operator, num1, num2):
+    """Performs the calculation based on the chosen operator."""
+    if operator == '+':
+        return num1 + num2
+    elif operator == '-':
+        return num1 - num2
+    elif operator == '*':
+        return num1 * num2
+    elif operator == '/':
+        if num2 == 0:
+            return "Error: Division by zero is not allowed."
+        return num1 / num2
+    elif operator == '\\':
+        if num2 == 0:
+            return "Error: Division by zero is not allowed."
+        return num1 // num2
+    elif operator == '^':
+        return num1 ** num2
+    elif operator == '%':
+        if num2 == 0:
+            return "Error: Modulus by zero is not allowed."
+        return num1 % num2
+    else:
+        return "Error: Unknown operator."
+
+
+def main():
+    """Main program loop for the Mathematical Calculator."""
+    clear_screen()
+    while True:
+        display_menu()
+        choice = input("Select an operation (+ - * / \\ ^ % C OFF): ").strip()
+
+        if choice.upper() == 'OFF':
+            print("\nThank you for using the Mathematical Calculator. Goodbye!")
+            break
+
+        elif choice.upper() == 'C':
+            clear_screen()
+            continue
+
+        elif choice in ['+', '-', '*', '/', '\\', '^', '%']:
+            num1, num2 = get_numbers()
+            result = calculate(choice, num1, num2)
+            print("\n" + "-" * 45)
+            print(f" RESULT: {num1} {choice} {num2} = {result}")
+            print("-" * 45)
+            input("\nPress ENTER to continue...")
+            clear_screen()
+
+        else:
+            print(">> Invalid selection. Please choose a valid operation.\n")
+            input("Press ENTER to continue...")
+            clear_screen()
+
+
+if __name__ == "__main__":
+    main()
+
